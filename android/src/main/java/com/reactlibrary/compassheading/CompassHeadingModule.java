@@ -161,25 +161,38 @@ public class CompassHeadingModule extends ReactContextBaseJavaModule implements 
         float[] outRotationMatrix = new float[9];
         int rotation = disp.getRotation();
 
-        if(roll < -40){
-            SensorManager.remapCoordinateSystem(rotationMatrix, SensorManager.AXIS_X, SensorManager.AXIS_Z, outRotationMatrix);
 
-        } else {
-            switch (rotation) {
-                case Surface.ROTATION_0:
+        switch (rotation) {
+            case Surface.ROTATION_0:
+                if(pitch < -10){
+                    SensorManager.remapCoordinateSystem(rotationMatrix, SensorManager.AXIS_X, SensorManager.AXIS_Z, outRotationMatrix);
+                } else {
                     SensorManager.remapCoordinateSystem(rotationMatrix, SensorManager.AXIS_X, SensorManager.AXIS_Y, outRotationMatrix);
-                    break;
-                case Surface.ROTATION_90:
+                }
+                break;
+            case Surface.ROTATION_90:
+                if(roll < -40){
+                    SensorManager.remapCoordinateSystem(rotationMatrix, SensorManager.AXIS_X, SensorManager.AXIS_Z, outRotationMatrix);
+                } else {
                     SensorManager.remapCoordinateSystem(rotationMatrix, SensorManager.AXIS_Y, SensorManager.AXIS_MINUS_X, outRotationMatrix);
-                    break;
-                case Surface.ROTATION_180:
+                }
+                break;
+            case Surface.ROTATION_180:
+                if(pitch > 10){
+                    SensorManager.remapCoordinateSystem(rotationMatrix, SensorManager.AXIS_X, SensorManager.AXIS_Z, outRotationMatrix);
+                } else {
                     SensorManager.remapCoordinateSystem(rotationMatrix, SensorManager.AXIS_MINUS_X, SensorManager.AXIS_MINUS_Y, outRotationMatrix);
-                    break;
-                case Surface.ROTATION_270:
+                }
+                break;
+            case Surface.ROTATION_270:
+                if(roll > 40){
+                    SensorManager.remapCoordinateSystem(rotationMatrix, SensorManager.AXIS_X, SensorManager.AXIS_Z, outRotationMatrix);
+                } else {
                     SensorManager.remapCoordinateSystem(rotationMatrix, SensorManager.AXIS_MINUS_Y, SensorManager.AXIS_X, outRotationMatrix);
-                    break;
-            }
+                }
+                break;
         }
+
 
         return outRotationMatrix;
     }
