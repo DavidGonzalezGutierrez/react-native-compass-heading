@@ -52,7 +52,7 @@ RCT_EXPORT_MODULE()
 - (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading {
     if (newHeading.headingAccuracy < 0) {
         [self sendEventWithName:kHeadingUpdated body:@{
-            @"heading": 0,
+            @"heading": @0,
             @"accuracy": @(newHeading.headingAccuracy)
         }];
         return;
