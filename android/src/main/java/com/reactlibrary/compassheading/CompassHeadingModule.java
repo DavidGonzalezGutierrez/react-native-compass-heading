@@ -227,6 +227,11 @@ public class CompassHeadingModule extends ReactContextBaseJavaModule implements 
             WritableMap params = Arguments.createMap();
             params.putDouble("heading", mAzimuth);
             params.putDouble("accuracy", accuracy);
+            params.putDouble("trueHeading", 0);
+            params.putDouble("magneticHeading", 0);
+            params.putNull("deviceOrientation");
+            params.putNull("osVersion");
+            params.putNull("deviceModel");
 
             getReactApplicationContext()
                 .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
